@@ -441,39 +441,83 @@
 //
 // Disable unused endstop / probe pins
 //
+#define _STOP_IN_USE(N) (X2_USE_ENDSTOP == N || Y2_USE_ENDSTOP == N || Z2_USE_ENDSTOP == N || Z3_USE_ENDSTOP == N || Z4_USE_ENDSTOP == N)
+#if _STOP_IN_USE(_XMAX_)
+  #define USE_XMAX_PLUG
+#endif
+#if _STOP_IN_USE(_YMAX_)
+  #define USE_YMAX_PLUG
+#endif
+#if _STOP_IN_USE(_ZMAX_)
+  #define USE_ZMAX_PLUG
+#endif
+#if _STOP_IN_USE(_XMIN_)
+  #define USE_XMIN_PLUG
+#endif
+#if _STOP_IN_USE(_YMIN_)
+  #define USE_YMIN_PLUG
+#endif
+#if _STOP_IN_USE(_ZMIN_)
+  #define USE_ZMIN_PLUG
+#endif
+#undef _STOP_IN_USE
 #if !HAS_CUSTOM_PROBE_PIN
   #undef Z_MIN_PROBE_PIN
   #define Z_MIN_PROBE_PIN    -1
 #endif
-
 #if DISABLED(USE_XMAX_PLUG)
   #undef X_MAX_PIN
   #define X_MAX_PIN          -1
 #endif
-
 #if DISABLED(USE_YMAX_PLUG)
   #undef Y_MAX_PIN
   #define Y_MAX_PIN          -1
 #endif
-
 #if DISABLED(USE_ZMAX_PLUG)
   #undef Z_MAX_PIN
   #define Z_MAX_PIN          -1
 #endif
-
 #if DISABLED(USE_XMIN_PLUG)
   #undef X_MIN_PIN
   #define X_MIN_PIN          -1
 #endif
-
 #if DISABLED(USE_YMIN_PLUG)
   #undef Y_MIN_PIN
   #define Y_MIN_PIN          -1
 #endif
-
 #if DISABLED(USE_ZMIN_PLUG)
   #undef Z_MIN_PIN
   #define Z_MIN_PIN          -1
+#endif
+#if DISABLED(X_DUAL_ENDSTOPS) || X_HOME_DIR > 0
+  #undef X2_MIN_PIN
+#endif
+#if DISABLED(X_DUAL_ENDSTOPS) || X_HOME_DIR < 0
+  #undef X2_MAX_PIN
+#endif
+#if DISABLED(Y_DUAL_ENDSTOPS) || Y_HOME_DIR > 0
+  #undef Y2_MIN_PIN
+#endif
+#if DISABLED(Y_DUAL_ENDSTOPS) || Y_HOME_DIR < 0
+  #undef Y2_MAX_PIN
+#endif
+#if DISABLED(Z_MULTI_ENDSTOPS) || Z_HOME_DIR > 0
+  #undef Z2_MIN_PIN
+#endif
+#if DISABLED(Z_MULTI_ENDSTOPS) || Z_HOME_DIR < 0
+  #undef Z2_MAX_PIN
+#endif
+#if DISABLED(Z_MULTI_ENDSTOPS) || NUM_Z_STEPPER_DRIVERS < 3 || Z_HOME_DIR > 0
+  #undef Z3_MIN_PIN
+#endif
+#if DISABLED(Z_MULTI_ENDSTOPS) || NUM_Z_STEPPER_DRIVERS < 3 || Z_HOME_DIR < 0
+  #undef Z3_MAX_PIN
+#endif
+#if DISABLED(Z_MULTI_ENDSTOPS) || NUM_Z_STEPPER_DRIVERS < 4 || Z_HOME_DIR > 0
+  #undef Z4_MIN_PIN
+#endif
+#if DISABLED(Z_MULTI_ENDSTOPS) || NUM_Z_STEPPER_DRIVERS < 4 || Z_HOME_DIR < 0
+  #undef Z4_MAX_PIN
 #endif
 
 #if HAS_FILAMENT_SENSOR
@@ -521,7 +565,7 @@
     #define X2_STEP_PIN   _EPIN(X2_E_INDEX, STEP)
     #define X2_DIR_PIN    _EPIN(X2_E_INDEX, DIR)
     #define X2_ENABLE_PIN _EPIN(X2_E_INDEX, ENABLE)
-    #if X2_E_INDEX >= MAX_EXTRUDERS || !PIN_EXISTS(X2_STEP)
+    #if X2_E_INDEX >= MAX_E_STEPPERS || !PIN_EXISTS(X2_STEP)
       #error "No E stepper plug left for X2!"
     #endif
   #endif
@@ -594,7 +638,7 @@
     #define Y2_STEP_PIN   _EPIN(Y2_E_INDEX, STEP)
     #define Y2_DIR_PIN    _EPIN(Y2_E_INDEX, DIR)
     #define Y2_ENABLE_PIN _EPIN(Y2_E_INDEX, ENABLE)
-    #if Y2_E_INDEX >= MAX_EXTRUDERS || !PIN_EXISTS(Y2_STEP)
+    #if Y2_E_INDEX >= MAX_E_STEPPERS || !PIN_EXISTS(Y2_STEP)
       #error "No E stepper plug left for Y2!"
     #endif
   #endif
@@ -662,7 +706,7 @@
     #define Z2_STEP_PIN   _EPIN(Z2_E_INDEX, STEP)
     #define Z2_DIR_PIN    _EPIN(Z2_E_INDEX, DIR)
     #define Z2_ENABLE_PIN _EPIN(Z2_E_INDEX, ENABLE)
-    #if Z2_E_INDEX >= MAX_EXTRUDERS || !PIN_EXISTS(Z2_STEP)
+    #if Z2_E_INDEX >= MAX_E_STEPPERS || !PIN_EXISTS(Z2_STEP)
       #error "No E stepper plug left for Z2!"
     #endif
   #endif
@@ -729,7 +773,7 @@
     #define Z3_STEP_PIN   _EPIN(Z3_E_INDEX, STEP)
     #define Z3_DIR_PIN    _EPIN(Z3_E_INDEX, DIR)
     #define Z3_ENABLE_PIN _EPIN(Z3_E_INDEX, ENABLE)
-    #if Z3_E_INDEX >= MAX_EXTRUDERS || !PIN_EXISTS(Z3_STEP)
+    #if Z3_E_INDEX >= MAX_E_STEPPERS || !PIN_EXISTS(Z3_STEP)
       #error "No E stepper plug left for Z3!"
     #endif
   #endif
@@ -796,7 +840,7 @@
     #define Z4_STEP_PIN   _EPIN(Z4_E_INDEX, STEP)
     #define Z4_DIR_PIN    _EPIN(Z4_E_INDEX, DIR)
     #define Z4_ENABLE_PIN _EPIN(Z4_E_INDEX, ENABLE)
-    #if Z4_E_INDEX >= MAX_EXTRUDERS || !PIN_EXISTS(Z4_STEP)
+    #if Z4_E_INDEX >= MAX_E_STEPPERS || !PIN_EXISTS(Z4_STEP)
       #error "No E stepper plug left for Z4!"
     #endif
   #endif
@@ -871,6 +915,13 @@
   #undef ST7920_DELAY_1
   #undef ST7920_DELAY_2
   #undef ST7920_DELAY_3
+  #undef BOARD_ST7920_DELAY_1
+  #undef BOARD_ST7920_DELAY_2
+  #undef BOARD_ST7920_DELAY_3
+#endif
+
+#if !NEED_CASE_LIGHT_PIN
+  #undef CASE_LIGHT_PIN
 #endif
 
 #undef HAS_FREE_AUX2_PINS
