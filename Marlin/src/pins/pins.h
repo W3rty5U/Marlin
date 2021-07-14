@@ -552,7 +552,7 @@
 #elif MB(TRIGORILLA_PRO)
   #include "stm32f1/pins_TRIGORILLA_PRO.h"      // STM32F1                                env:trigorilla_pro
 #elif MB(FLY_MINI)
-  #include "stm32f1/pins_FLY_MINI.h"            // STM32F1                                env:FLY_MINI
+  #include "stm32f1/pins_FLY_MINI.h"            // STM32F1                                env:FLY_MINI env:FLY_MINI_maple
 #elif MB(FLSUN_HISPEED)
   #include "stm32f1/pins_FLSUN_HISPEED.h"       // STM32F1                                env:flsun_hispeedv1
 #elif MB(BEAST)
@@ -594,9 +594,9 @@
 #elif MB(BTT_E3_RRF)
   #include "stm32f4/pins_BTT_E3_RRF.h"          // STM32F4                                env:BIGTREE_E3_RRF
 #elif MB(BTT_SKR_V2_0_REV_A)
-  #include "stm32f4/pins_BTT_SKR_V2_0_REV_A.h"  // STM32F4                                env:BIGTREE_SKR_2
+  #include "stm32f4/pins_BTT_SKR_V2_0_REV_A.h"  // STM32F4                                env:BIGTREE_SKR_2 env:BIGTREE_SKR_2_USB
 #elif MB(BTT_SKR_V2_0_REV_B)
-  #include "stm32f4/pins_BTT_SKR_V2_0_REV_B.h"  // STM32F4                                env:BIGTREE_SKR_2
+  #include "stm32f4/pins_BTT_SKR_V2_0_REV_B.h"  // STM32F4                                env:BIGTREE_SKR_2 env:BIGTREE_SKR_2_USB
 #elif MB(BTT_OCTOPUS_V1_0)
   #include "stm32f4/pins_BTT_OCTOPUS_V1_0.h"    // STM32F4                                env:BIGTREE_OCTOPUS_V1 env:BIGTREE_OCTOPUS_V1_USB
 #elif MB(BTT_OCTOPUS_V1_1)
@@ -610,11 +610,11 @@
 #elif MB(VAKE403D)
   #include "stm32f4/pins_VAKE403D.h"            // STM32F4
 #elif MB(FYSETC_S6)
-  #include "stm32f4/pins_FYSETC_S6.h"           // STM32F4                                env:FYSETC_S6
+  #include "stm32f4/pins_FYSETC_S6.h"           // STM32F4                                env:FYSETC_S6 env:FYSETC_S6_8000
 #elif MB(FYSETC_S6_V2_0)
-  #include "stm32f4/pins_FYSETC_S6_V2_0.h"      // STM32F4                                env:FYSETC_S6
+  #include "stm32f4/pins_FYSETC_S6_V2_0.h"      // STM32F4                                env:FYSETC_S6 env:FYSETC_S6_8000
 #elif MB(FYSETC_SPIDER)
-  #include "stm32f4/pins_FYSETC_SPIDER.h"       // STM32F4                                env:FYSETC_S6
+  #include "stm32f4/pins_FYSETC_SPIDER.h"       // STM32F4                                env:FYSETC_S6 env:FYSETC_S6_8000
 #elif MB(FLYF407ZG)
   #include "stm32f4/pins_FLYF407ZG.h"           // STM32F4                                env:FLYF407ZG
 #elif MB(MKS_ROBIN2)
