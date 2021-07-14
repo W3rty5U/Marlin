@@ -39,18 +39,20 @@
 #define X_STEP_PIN                         P0_04
 #define X_DIR_PIN                          P0_05
 #define X_ENABLE_PIN                       P4_28
-#define X_SERIAL_TX_PIN                    P0_10
-#define X_SERIAL_RX_PIN                    P0_10
+#define X_SERIAL_TX_PIN                    P2_06
+#define X_SERIAL_RX_PIN                    P2_06
 
 #define Y_STEP_PIN                         P2_01
 #define Y_DIR_PIN                          P2_02
 #define Y_ENABLE_PIN                       P2_00
-#define Y_SERIAL_TX_PIN                    P0_01
-#define Y_SERIAL_RX_PIN                    P0_01
+#define Y_SERIAL_TX_PIN                    P0_10
+#define Y_SERIAL_RX_PIN                    P0_10
 
 #define Z_STEP_PIN                         P0_20
 #define Z_DIR_PIN                          P0_21
 #define Z_ENABLE_PIN                       P0_19
+#define Z_SERIAL_TX_PIN                    P0_01
+#define Z_SERIAL_RX_PIN                    P0_01
 
 #define E0_STEP_PIN                        P0_11
 #define E0_DIR_PIN                         P2_13
